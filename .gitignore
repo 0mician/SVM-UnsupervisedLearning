@@ -37,3 +37,7 @@ test.m
 resources/SVMCourse/
 resources/m/
 resources/svm/
+resources/fixedSizeScripts
+resources/kernelPCAscripts_1
+resources/SampleSpectralClustering
+
