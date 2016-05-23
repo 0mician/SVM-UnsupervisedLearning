@@ -47,7 +47,7 @@ for num_comp=[1 2 4 8 16 32]
     plot(samplesyang(:,1),samplesyang(:,2),'.');
     plot(xd(:,1),xd(:,2),'r+');
     hold off
-    title(['number of components: ' num2str(num_comp)]);
+    title(['number of components: ' num2str(num_comp)], 'FontSize', 18, 'FontWeight', 'normal');
     count = count + 1;
 end
 export_fig('kpca_ncomp.pdf');
@@ -68,7 +68,7 @@ for sig2=[0.1 0.5 1 5 10 50]
     plot(samplesyang(:,1),samplesyang(:,2),'.', 'MarkerSize',5);
     plot(xd(:,1),xd(:,2),'r+');
     hold off
-    title(['RBF sigma^2: ' num2str(sig2)]);
+    title(['RBF sigma^2: ' num2str(sig2)], 'FontSize', 18, 'FontWeight', 'normal');
     count = count + 1
 end
 export_fig('kpca_sigma.pdf');
@@ -118,7 +118,7 @@ xd = denoise_kpca([samplesyin;samplesyang],'RBF_kernel',sig2,[],approx,nc);
 plot(samplesyin(:,1),samplesyin(:,2),'o');
 plot(samplesyang(:,1),samplesyang(:,2),'o');
 plot(xd(:,1),xd(:,2),'r+');
-title('Kernel PCA - Denoised datapoints in red');
+title('Kernel PCA - Denoised datapoints in red', 'FontSize', 18, 'FontWeight', 'normal');
 
 disp('Press any key to continue');
 pause;
@@ -144,5 +144,5 @@ plot(samplesyang(:,1),samplesyang(:,2),'o');
 xdl=dat*U_lin(:,1)*U_lin(:,1)';
 plot(xdl(:,1),xdl(:,2),'r+');
 
-title('Linear PCA - Denoised data points using the first principal component');
+title('Linear PCA - Denoised data points using the first principal component', 'FontSize', 18, 'FontWeight', 'normal');
 export_fig('kpca_linear.pdf');

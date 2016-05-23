@@ -46,6 +46,8 @@ subplot(1,2,2);
 imshow(Ksorted);
 title('Kernel matrix after sorting the data using the cluster information', 'FontSize', 18, 'FontWeight', 'normal');
 
+export_fig('scluster_matrix.pdf');
+
 figure('Color',[1 1 1]);
 scatter(proj(:,1),proj(:,2),15,clust);
 title('Projections onto subspace spanned by the 2nd and 3rd largest eigenvectors', 'FontSize', 18, 'FontWeight', 'normal');
