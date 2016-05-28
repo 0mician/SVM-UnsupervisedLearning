@@ -9,7 +9,7 @@ load '../datasets/two3drings'
 
 perm=randperm(N);   % shuffle the data
 X=X(perm,:);
-sig2=0.05;              % set the kernel parameters
+sig2=0.005;              % set the kernel parameters
 K=kernel_matrix(X,'RBF_kernel',sig2);   %compute the RBF kernel (affinity) matrix
 D=diag(sum(K));         % compute the degree matrix (sum of the columns of K)
 [U,lambda]=eigs(inv(D)*K,3);  % Compute the 3 largest eigenvalues/vectors using Lanczos

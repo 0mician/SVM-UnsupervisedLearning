@@ -16,13 +16,13 @@ for t=1:nb,
 end
 
 % plot dataset
-% h=figure('Color', [1 1 1]); hold on
-% plot(samplesyin(:,1),samplesyin(:,2),'o');
-% plot(samplesyang(:,1),samplesyang(:,2),'o');
-% xlabel('X_1');
-% ylabel('X_2');
-% title('Structured dataset');
-% export_fig('kpca_dataset.pdf');
+h=figure('Color', [1 1 1]); hold on
+plot(samplesyin(:,1),samplesyin(:,2),'o');
+plot(samplesyang(:,1),samplesyang(:,2),'o');
+xlabel('X_1');
+ylabel('X_2');
+title('Structured dataset');
+export_fig('kpca_dataset.pdf');
 
 % get user-defined parameters
 nc = input('\n Number of components to be extracted? [6] '); if isempty(nc) nc=6; end;

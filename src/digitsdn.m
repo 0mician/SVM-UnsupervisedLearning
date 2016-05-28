@@ -31,7 +31,7 @@ end
 
 % select training set
 Xtr = X(1:1:end,:);
-sig2 =dim*mean(var(Xtr)); % rule of thumb
+sig2 = 50000 ;%dim*mean(var(Xtr)); % rule of thumb
 sigmafactor = 0.7;
 sig2=sig2*sigmafactor;
 
@@ -149,7 +149,7 @@ for k=1:lpcs;
    drawnow    
  end % for i
 end % for k
-export_fig('digitsdn_kernelpca.pdf');
+%export_fig('digitsdn_kernelpca.pdf');
 
 % denoising using Linear PCA for comparison
 % which number of eigenvalues of pca
