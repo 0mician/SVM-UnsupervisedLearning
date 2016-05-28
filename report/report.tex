@@ -26,35 +26,36 @@
 The analysis presented in this report was produced for the class of
 ``Support Vector Machines: methods and applications'' at KU Leuven
 (Spring 2016). The goal is to display understanding of the techniques
-and of their practical use.This third report focuses on unsupervised
-learning (kernel PCA) using Least-Squares SVM (LS-SVM). The
-implementation was done using the MatLab environment (v2015a) and the
-libraries for LS-SVM developed at KU Leuven
+and of their practical use. This third report focuses on unsupervised
+learning (kernel PCA), and fixed-size LS-SVM using Least-Squares
+SVM. The implementation was done using the MatLab environment (v2015a)
+and the libraries for LS-SVM developed at KU Leuven
 \footnote{http://www.esat.kuleuven.be/sista/lssvmlab/}.
 
 \section{Kernel Principal Component Analysis}
 
 In this section, we use the synthetic dataset illustrated on figure
 \ref{fig:kpca_dataset} to explore the relationship between the choices
-of kernel, hyper-parameters and the number of components.
+of kernel, hyper-parameters and the number of components. The goal
+behind this type of exercise is to eliminate the noise. Indeed you
+would hope that the noise is subtracted when the reconstruction
+process takes place.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.40]{kpca_dataset.pdf}
+  \includegraphics[scale=.35]{kpca_dataset.pdf}
   \caption{Synthetic dataset Yin-Yang}
   \label{fig:kpca_dataset}
 \end{figure}
 
 Figure \ref{fig:kpca_ncomp} allows us to visualize what happens when
-you increase the number of component in a given setting (here
-$\sigma^2=0.4$). We can see that the denoising works really well once
-the number of components has increased to 4 and above. Figure
+you increase the number of component for a fixed $\sigma^2=0.4$. We
+can see that the denoising works really well once the number of
+components has been increased to somewhere between 4 and 8. Figure
 \ref{fig:kpca_sigma} illustrates the impact of $\sigma^2$ on the
-denoising for a number of components fixed to 6. Given that the hope
-is that by throwing away components, you hope to reduce the noise, a
-correct choice in the number of component in this case seems to be
-somewhere between 4 and 8 components. Similarly, a good value for
-$\sigma^2$ seems to lie somewhere between 0.1 and 0.5.
+denoising for a number of components fixed to 6. A good value for
+$\sigma^2$ seems to lie somewhere between 0.1 and 0.5. Above those
+values, more of the noise is being fit.
 
 Given the structure of the dataset, linear PCA gives very poor results
 in terms of denoising (see figure \ref{fig:kpca_linear}). The maximum
@@ -67,14 +68,14 @@ matrix (which is n-by-n, with n being the number of data point).
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.40]{kpca_ncomp.pdf}
+  \includegraphics[scale=.35]{kpca_ncomp.pdf}
   \caption{Denoising for various values of components}
   \label{fig:kpca_ncomp}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.40]{kpca_sigma.pdf}
+  \includegraphics[scale=.35]{kpca_sigma.pdf}
   \caption{Denoising for various values of $\sigma^2$}
   \label{fig:kpca_sigma}
 \end{figure}
@@ -96,15 +97,16 @@ high number of components or a large $\sigma^2$ would result in a
 fitting of the noise. Given that we know the underlying true function,
 a calculation of the error would reveal the overfitting.
 
+\newpage
 \section{Handwritten Digit Denoising}
 
 The results of the denoising process are reported on figures
 \ref{fig:digitsn_kernelpca} and \ref{fig:digitsn_linearpca}. As can be
 observed, the performance of the kernel PCA in terms of denoising are
-much better. Basically, the linear PCA decomposition into 256
+much better. Basically, the linear PCA decomposition into 190
 components, followed by the reconstruction using progressively more
-and more components (256 in the last row) returns the original noisy
-image. Where as the kernel PCA is able to extract out the gaussian
+and more components (190 in the last row) returns the original noisy
+image. Whereas the kernel PCA is able to extract out the gaussian
 noise during the reconstruction, returning a very convincing, denoised
 image which is similar to the original noiseless one.
 
@@ -117,14 +119,14 @@ digits.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.30]{digitsn_kernelpca.jpg}
+  \includegraphics[scale=.24]{digitsn_kernelpca.jpg}
   \caption{Denoising digits using a kernel PCA approach}
   \label{fig:digitsn_kernelpca}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.30]{digitsn_linearpca.jpg}
+  \includegraphics[scale=.24]{digitsn_linearpca.jpg}
   \caption{Denoising digits using a linear PCA approach}
   \label{fig:digitsn_linearpca}
 \end{figure}
@@ -133,7 +135,11 @@ digits.
 
 The difference between clustering and classification lies in the type
 of learning at work. In clustering, no labels are used - a setting
-usually referred to as \emph{unsupervised learning}.
+usually referred to as \emph{unsupervised learning}. Often, a notion
+of distance will be defined, and objects will be clustered together
+based on whether or not they are close to each other. In
+classification, labels are available and are used as target - a
+setting usually referred to as \emph{learning}.
 
 On the figure \ref{fig:sclustering_origcl} and
 \ref{fig:sclustering_matrix} we can see the results fo the spectral
@@ -142,16 +148,18 @@ seem to lead to good clustering results, ie a good separation of the
 two rings.
 
 \begin{figure}[H]
+  \vspace{-10pt}
   \centering
-  \includegraphics[scale=.40]{sclustering_origcl.pdf}
-  \caption{Clustering 1}
+  \includegraphics[scale=.35]{sclustering_origcl.pdf}
+  \caption{Clustering of the two rings}
   \label{fig:sclustering_origcl}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.40]{sclustering_origcl2.pdf}
-  \caption{Clustering 2}
+  \includegraphics[scale=.35]{sclustering_origcl2.pdf}
+  \caption{Projection onto subspace spanned by the 2nd and 3rd largest
+    eigenvectors}
   \label{fig:sclustering_origcl2}
 \end{figure}
 
@@ -163,7 +171,7 @@ support vector, matrix not sparse) which did not render well.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.40]{scluster_matrix.pdf}
+  \includegraphics[scale=.35]{scluster_matrix.pdf}
   \caption{Matrix}
   \label{fig:sclustering_matrix}
 \end{figure}
@@ -181,7 +189,7 @@ $\sigma^2$ seem to result in a selection that is more evenly spaced.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.40]{fslssvm_sig2.pdf}
+  \includegraphics[scale=.35]{fslssvm_sig2.pdf}
   \caption{Subset selection via fixed-size lssvm}
   \label{fig:fslssvm_sig2}
 \end{figure}
@@ -192,7 +200,7 @@ $l_0-approximation$.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.40]{fslssvm_script.pdf}
+  \includegraphics[scale=.36]{fslssvm_script.pdf}
   \caption{fslssvm-script}
   \label{fig:fslssvm_script}
 \end{figure}
@@ -213,7 +221,7 @@ consists only of noise.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.15]{nndigits_all.png}
+  \includegraphics[scale=.13]{nndigits_all.png}
   \caption{Reconstruction different sigma (top to bottom, left to
     right: [50, 500, 5000, 50000]}
   \label{fig:nndigits_all}
@@ -239,7 +247,7 @@ For this exercise, one of the challenge was to deal with the sheer
 amount of computations required for the fslssvm to complete. A first
 attempt on my personal computer revealed a progress of less than 4\%
 for 1 hour of computing time. I therefore used the VSC infrastructure,
-where one node with 20 CPU cut down the computation time to around 3
+where one node with 20 cores cut down the computation time to around 3
 hrs.
 
 The results are displayed in figure \ref{fig:fslssvm_shuttle}. Note
@@ -253,7 +261,7 @@ FS-FLSSVM approach.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.40]{fslssvm_shuttle.pdf}
+  \includegraphics[scale=.36]{fslssvm_shuttle.pdf}
   \caption{Metrics comparison for fs-lssvm and l\_0}
   \label{fig:fslssvm_shuttle}
 \end{figure}
@@ -273,9 +281,9 @@ approach.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=.40]{fslssvm_california.pdf}
+  \includegraphics[scale=.36]{fslssvm_california.pdf}
   \caption{Metrics comparison for fs-lssvm and l\_0}
   \label{fig:fslssvm_california}
 \end{figure}
-%\bibliographystyle{ieeetr} \bibliography{bib-db}
+
 \end{document}
