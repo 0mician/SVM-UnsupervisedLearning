@@ -113,9 +113,9 @@ image which is similar to the original noiseless one.
 Interestingly, it is possible to see some errors in the reconstruction
 of the digits using the kernel PCA approach, indicating that a certain
 amount of components is necessary. For many of the digits it would
-seem that using very few components for the reconstruction leads to a
-8 and a 7. Increasing the components resolves the problem for most
-digits.
+seem that using very few components for the reconstruction is biased
+towards 8 and a 7. Increasing the components resolves the problem for
+most digits.
 
 \begin{figure}[H]
   \centering
@@ -138,14 +138,16 @@ of learning at work. In clustering, no labels are used - a setting
 usually referred to as \emph{unsupervised learning}. Often, a notion
 of distance will be defined, and objects will be clustered together
 based on whether or not they are close to each other. In
-classification, labels are available and are used as target - a
-setting usually referred to as \emph{learning}.
+classification, labels are available and are used as targets to train
+the model - a setting usually referred to as \emph{supervised
+  learning}.
 
 On the figure \ref{fig:sclustering_origcl} and
-\ref{fig:sclustering_matrix} we can see the results fo the spectral
-clustering for various values of $\sigma^2$. A good value $\sigma^2$
-seem to lead to good clustering results, ie a good separation of the
-two rings.
+\ref{fig:sclustering_origcl2} we can see the results fo the spectral
+clustering for various values of $\sigma^2$. Selecting
+$\sigma^2 \in [0.001,0.01]$ leads to good clustering results, ie a
+good separation of the two rings. A good separation is also visible
+for those values on the projection graphics.
 
 \begin{figure}[H]
   \vspace{-10pt}
@@ -165,8 +167,8 @@ two rings.
 
 Figure \ref{fig:sclustering_matrix} reports the kernel matrix for a
 value of $\sigma^2=0.05$, this is a bit suboptimal, but the better
-value $\sigma^2=0.005$ gave a rendering that is mostly dark (lots of
-support vector, matrix not sparse) which did not render well. 
+value $\sigma^2=0.005$ gave a rendering that is mostly dark - lots of
+support vector, matrix not sparse.
 
 
 \begin{figure}[H]
@@ -184,8 +186,12 @@ space. By means of finite samples of the datapoints, one can obtain a
 finite estimation of the feature map.
 
 Figure \ref{fig:fslssvm_sig2} reports the influence of different
-values of $\sigma^2$ on the subset selection. Larger values of
-$\sigma^2$ seem to result in a selection that is more evenly spaced.
+values of $\sigma^2$ on the subset selection (entropy
+criteria). Larger values of $\sigma^2$ seem to result in a selection
+that is more evenly spaced.
+
+The algorithm should converge to a set of points that represent best
+those needed to build a correct model in the feature space.
 
 \begin{figure}[H]
   \centering
@@ -196,6 +202,9 @@ $\sigma^2$ seem to result in a selection that is more evenly spaced.
 
 Figure \ref{fig:fslssvm_script} shows the results in terms of
 different metrics for the two approaches, fixed-size lssvm and the
+$l_0-approximation$. As can be expected, the number of support vectors
+is much lower for the $l_0-approximation$. The error between the 2
+approaches is quite similar, with a larger variance for
 $l_0-approximation$.
 
 \begin{figure}[H]
@@ -206,6 +215,7 @@ $l_0-approximation$.
 \end{figure}
 
 
+\newpage
 \section{Applications}
 
 \subsection{Handwritten Digit Denoising}
@@ -257,7 +267,8 @@ a ration of 70/30.
 The errors are comparable for both approaches, and so was the time
 estimate. The support vectors comparison however revealed that fewer
 of them were necessary on average for the $SV\_L_0 norm$ than for the
-FS-FLSSVM approach.
+FS-FLSSVM approach (which is expected, see \footnote{\emph{Sparse
+    LS-SVMs with L 0 –norm minimization} by Lopez et al.}).
 
 \begin{figure}[H]
   \centering
@@ -268,16 +279,16 @@ FS-FLSSVM approach.
 
 \subsection{California}
 
-The results are displayed in figure \ref{fig:fslssvm_california}. The
-dataset was also divided in a 70\%/30\% scheme for the training and
-test.
+Similar interpretation of the results can be given for this dataset
+and are displayed in figure \ref{fig:fslssvm_california}. The dataset
+was also divided in a 70\%/30\% scheme for the training and test.
 
-Similarly to the shuttle dataset, the time comparison does not reveal
-major differences between the 2 approaches. The error is this time
-noticeably different, with FS-LSSVM having an edge in terms of
-accuracy. The number of SV is in accordance with the previous section,
-where we also found a higher number of SV needed for the FS-LSSVM
-approach.
+% Similarly to the shuttle dataset, the time comparison does not reveal
+% major differences between the 2 approaches. The error is this time
+% noticeably different, with FS-LSSVM having an edge in terms of
+% accuracy. The number of SV is in accordance with the previous section,
+% where we also found a higher number of SV needed for the FS-LSSVM
+% approach.
 
 \begin{figure}[H]
   \centering
