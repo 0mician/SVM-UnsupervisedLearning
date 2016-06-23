@@ -16,7 +16,6 @@ testY = bc(testInd,end);
 
 %Parameter for input space selection
 %Please type >> help fsoperations; to get more information  
-
 k = 6;
 function_type = 'f'; %'c' - classification, 'f' - regression  
 kernel_type = 'RBF_kernel'; % or 'lin_kernel', 'poly_kernel'

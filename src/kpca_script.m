@@ -90,29 +90,9 @@ end
 
 
 % calculate the eigenvectors in the feature space (principal components)
-
 [lam,U] = kpca([samplesyin;samplesyang],'RBF_kernel',sig2,[],approx,nc);
 
-
-% calculate the projections on the principal components
-% Xax = -3:.1:3; Yax = -3.2:.1:3.2;
-% [A,B] = meshgrid(Xax,Yax);
-% grid = [reshape(A,prod(size(A)),1) reshape(B,1,prod(size(B)))'];
-% k = kernel_matrix([samplesyin;samplesyang],'RBF_kernel',sig2,grid)';
-% projections = k*U;
-
-% plot the projections on the first component
-
-% plot(samplesyin(:,1),samplesyin(:,2),'o');hold on;
-% plot(samplesyang(:,1),samplesyang(:,2),'o');
-% contour(Xax,Yax,reshape(projections(:,1),length(Yax),length(Xax)));
-% title('Kernel PCA - Projections of the input space on the first principal component');
-% figure(h);
-% disp('Press any key to continue');
-% pause;
-
 % Denoise the data by minimizing the reconstruction error
-
 xd = denoise_kpca([samplesyin;samplesyang],'RBF_kernel',sig2,[],approx,nc);
 %h2=figure;
 plot(samplesyin(:,1),samplesyin(:,2),'o');
@@ -124,25 +104,17 @@ disp('Press any key to continue');
 pause;
 
 % Projections on the first component using linear PCA
-
 dat=[samplesyin;samplesyang];
 dat(:,1)=dat(:,1)-mean(dat(:,1));
 dat(:,2)=dat(:,2)-mean(dat(:,2));
-
-
 [lam_lin,U_lin] = pca(dat);
 
-
 %proj_lin=grid*U_lin;
-
 figure;
-
 plot(samplesyin(:,1),samplesyin(:,2),'o');hold on;
 plot(samplesyang(:,1),samplesyang(:,2),'o');
 %contour(Xax,Yax,reshape(proj_lin(:,1),length(Yax),length(Xax)));
-
 xdl=dat*U_lin(:,1)*U_lin(:,1)';
 plot(xdl(:,1),xdl(:,2),'r+');
-
 title('Linear PCA - Denoised data points using the first principal component', 'FontSize', 18, 'FontWeight', 'normal');
 export_fig('kpca_linear.pdf');

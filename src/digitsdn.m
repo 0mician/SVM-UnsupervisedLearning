@@ -46,56 +46,6 @@ disp(['sig2 = ', num2str(sig2)]);
 [lam,U] = kpca(Xtr,'RBF_kernel',sig2,[],'eig',240); 
 [lam, ids]=sort(-lam); lam = -lam; U=U(:,ids);
 
-% % Visualize the ith eigenvector 
-% %
-% disp(' ');
-% disp(' Visualize the eigenvectors');
-% 
-% % define the number of eigen vectors to visualize
-% nball = min(length(lam),length(lam_lin));
-% eigs = [1:10];
-% ne=length(eigs); 
-% 
-% % compute the projections of the ith canonical basis vector e_i, i=1:240
-% k = kernel_matrix(Xtr,'RBF_kernel',sig2,eye(dim))'; proj_e=k*U;
-% figure; colormap(gray); eigv_img=zeros(ne,dim);  
-% 
-% for i=1:ne; 
-%     ieig=eigs(i);
-% 
-%     % linear PCA 
-%     if ieig<=length(lam_lin),
-%       subplot(3, ne, i); 
-%       pcolor(1:15,16:-1:1,reshape(real(U_lin(:,ieig)), 15, 16)'); shading interp; 
-%       set(gca,'xticklabel',[]);set(gca,'yticklabel',[]);
-%       title(['\lambda',sprintf('%d\n%.4f', ieig, lam_lin(ieig))],'fontSize',6) 
-%       if i==1, ylabel('linear'), end
-%       drawnow
-%     end
-%       
-%     % kPCA  
-%     % The preimage of the eigenvector in the feature space might not exist! 
-%     if ieig<=length(lam),
-%       eigv_img(i,:) = preimage_rbf(Xtr,sig2,U(:,ieig),zeros(1,dim),'d');
-%       subplot(3, ne, i+ne); 
-%       pcolor(1:15,16:-1:1,reshape(real(eigv_img(i,:)),15, 16)'); shading interp;
-%       set(gca,'xticklabel',[]);set(gca,'yticklabel',[]);
-%       title(['\lambda',sprintf('%d\n%.4f', ieig, lam(ieig))],'fontSize',6) 
-%       if i==1, ylabel('kernel'); end
-%       drawnow
-%     end
-% 
-%     if ieig<=size(proj_e,2),
-%       subplot(3, ne, i+ne+ne); 
-%       pcolor(1:15,16:-1:1,reshape(real(proj_e(:,ieig)), 15, 16)'); shading interp; 
-%       set(gca,'xticklabel',[]);set(gca,'yticklabel',[]); 
-%       title(['\lambda',sprintf('%d\n%.4f', ieig, lam(ieig))],'fontSize',6) 
-%       if i==1, ylabel('kernel'); end
-%       drawnow
-%     end
-%     
-% end
-
 % Denoise using the first principal components
 disp(' ');
 disp(' Denoise using the first PCs');
